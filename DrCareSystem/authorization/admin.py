@@ -1,3 +1,4 @@
 from django.contrib import admin
 
-# Register your models here.
+from authorization.models import DrAccount
+admin.site.register(DrAccount)
