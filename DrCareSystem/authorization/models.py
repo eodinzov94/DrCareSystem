@@ -4,12 +4,12 @@ from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 
 
 class MyAccManager(BaseUserManager):
-    def create_user(self,first_name,last_name,username,password,dr_license):
+    def create_user(self,first_name,last_name,username,password,person_ID):
         if not username:
             raise ValueError("Users must have an username")
         user = self.model(
             username = username,
-            dr_license = dr_license,
+            person_ID = person_ID,
             first_name=first_name,
             last_name=last_name,
         )
@@ -22,11 +22,12 @@ class MyAccManager(BaseUserManager):
             first_name='Admin',
             last_name='Admin',
             password = password,
-            dr_license = ""
+            person_ID = ""
         )
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
+        user.is_doctor = False
         user.save(using=self._db)
         return user
 class DrAccount(AbstractBaseUser):
@@ -36,10 +37,11 @@ class DrAccount(AbstractBaseUser):
     is_active                = models.BooleanField(default=True)
     is_staff                 = models.BooleanField(default=False)
     is_superuser             = models.BooleanField(default=False)
+    is_doctor                = models.BooleanField(default=True)
     username                 = models.CharField(max_length=30,unique=True)
     first_name               = models.CharField(max_length=30, default='')
     last_name                = models.CharField(max_length=30, default='')
-    dr_license               = models.CharField(max_length =8,unique=True)  
+    person_ID                = models.CharField(max_length =8,unique=True)  
     objects = MyAccManager()
     USERNAME_FIELD = 'username'
     def __str__(self):

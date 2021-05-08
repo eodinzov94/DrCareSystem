@@ -23,11 +23,15 @@ from django.contrib.auth.decorators import login_required
 #         return render(request, 'login.html')
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(username=username, password=password)
+        username   = request.POST['username']
+        password   = request.POST['password']
+        person_ID  = request.POST['ID']
+        user = auth.authenticate(person_ID=person_ID,username=username, password=password)
         if user is not None:
-            auth.login(request, user)
+            if user.person_ID==person_ID:
+                auth.login(request, user)
+            else:
+                messages.info(request, 'Invalid ID')
             return redirect('/')
         else:
             messages.info(request, 'Invalid credentials')
