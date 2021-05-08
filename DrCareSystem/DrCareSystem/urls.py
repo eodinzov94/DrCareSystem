@@ -21,5 +21,6 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('', include('authorization.urls')),
+    path('', include('patient.urls')),
     path('admin/', admin.site.urls),
 ]
