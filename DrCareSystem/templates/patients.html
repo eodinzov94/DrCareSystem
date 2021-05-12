@@ -43,11 +43,11 @@
                         <td>
                             <form action="getVisits" method="post">
                                 {% csrf_token %}
-                             <button style="float: left;" class="btn btn-info"  title="View history" data-toggle="tooltip" type="submit" value="{{patient.id}}" name="id" type="submit"><i class="fa fa-eye" aria-hidden="true" > </i></button>
+                             <button style="float: left;" class="btn btn-info"  title="View history" data-toggle="tooltip" type="submit" value="{{patient.id}}" name="id" ><i class="fa fa-eye" aria-hidden="true" > </i></button>
                             </form>
-                            <form action="getVisits" method="post">
+                            <form action="newVisit" method="post">
                             {% csrf_token %}
-                            <button style="float: right;" class="btn btn-success" title="View history" data-toggle="tooltip" type="submit" value="{{patient.id}}" name="id" type="submit"><i class="fa fa-plus" aria-hidden="true" ></i></button>
+                            <button style="float: right;" class="btn btn-success" title="Add visit" data-toggle="tooltip" type="submit" value="{{patient.id}}" name="id" ><i class="fa fa-plus" aria-hidden="true" ></i></button>
                             </form>
                         </td>
                     </tr>
