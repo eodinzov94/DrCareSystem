@@ -1,20 +1,5 @@
 from django.contrib import admin
 from authorization.models import DrAccount
-# class UsersAdmin(admin.ModelAdmin):
-#     list_display = (
-#         'username',
-#         'data_joined',
-#         'is_active',
-#         'first_name',
-#         'last_name',
-#         'dr_license',
-#         )
-#     fields = ('username','first_name','last_name','dr_license','is_admin',"is_staff","is_superuser","password")
-#     list_filter = ('data_joined','is_active',)
-#     search_fields = ['username','first_name','last_name','dr_license']
-#     ordering = ('username','data_joined')
-#     filter_horizontal = ()
-# admin.site.register(DrAccount,UsersAdmin)
 
 from django import forms
 from django.contrib.auth.models import Group

@@ -31,7 +31,7 @@
                       {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">
                     <i class="fa fa-plus" aria-hidden="true"></i>Add new patient</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'patients' %}">
                     <i class="fa fa-list-alt" aria-hidden="true"></i>Patient list</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'logout' %}">
                     <i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
