@@ -46,7 +46,7 @@ def newPatient(request): #TODO: make error appear on screen.
         personID = request.POST.get('personid')
         tel = request.POST.get('tel')
         gender = request.POST.get('gender')
-        age = request.POST.get('age')
+        age = int(request.POST.get('age'))
 
         if len(fullName) < 4:
             messages.info(request, 'Name too short!')
@@ -74,7 +74,7 @@ def newPatient(request): #TODO: make error appear on screen.
     else:
         return render(request, 'newPatient.html')
 
-
+@login_required
 def updateQuest(request):
     if request.method == 'POST':
         id                  = request.POST.get('patient_db_id')
@@ -86,7 +86,8 @@ def updateQuest(request):
         isEatingToMuchMeat  = bool(request.POST.get('isEatingToMuchMeat'))
         isMalnourished      = bool(request.POST.get('isMalnourished'))
         patient = Patient.objects.get(id=id)
-        quest   = patient.questionnaire
+        quest = patient.questionnaire
+        results = patient.health_param
         if quest is None:
             quest = Questionnaire(
                 isSmoking              =  isSmoking ,
@@ -97,13 +98,17 @@ def updateQuest(request):
                 isEatingToMuchMeat     =  isEatingToMuchMeat ,
                 isMalnourished         =  isMalnourished 
             )
+            quest.save()
+            patient.questionnaire = quest
+            patient.save()
         else:
-            quest.isSmoking              =  isSmoking ,
-            quest.isOriental             =  isOriental, 
-            quest.isDrugsSensitive       =  isDrugsSensitive ,
-            quest.hasChronicalDisease    =  hasChronicalDisease ,
-            quest.isNeedsDiet            =  isNeedsDiet ,
-            quest.isEatingToMuchMeat     =  isEatingToMuchMeat ,
+            quest   = Questionnaire.objects.get(id =  patient.questionnaire.id)
+            quest.isSmoking              =  isSmoking 
+            quest.isOriental             =  isOriental
+            quest.isDrugsSensitive       =  isDrugsSensitive
+            quest.hasChronicalDisease    =  hasChronicalDisease
+            quest.isNeedsDiet            =  isNeedsDiet
+            quest.isEatingToMuchMeat     =  isEatingToMuchMeat
             quest.isMalnourished         =  isMalnourished 
-        quest.save()
-    return redirect('newVisit')
+            quest.save()
+        return render(request, 'newVisit.html', {'patient':patient,'results': results,'quest': quest})

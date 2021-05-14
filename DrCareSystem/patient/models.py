@@ -64,7 +64,7 @@ class Patient(models.Model):
     fullName        = models.CharField(max_length=100, default ='Mendy')
     personID        = models.CharField(max_length=9, unique=True)
     tel             = models.CharField(max_length=10, default ='')
-    gender          = models.CharField(max_length=1, default ='M')
+    gender          = models.CharField(max_length=10,default ='Male')
     age             = models.IntegerField()
     health_param    = models.OneToOneField(HealthParameters, models.SET_NULL,blank= True, null= True)
     questionnaire   = models.OneToOneField(Questionnaire, models.SET_NULL,blank= True, null= True)

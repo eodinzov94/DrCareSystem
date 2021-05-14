@@ -99,7 +99,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .modal-wrapper {
     display:table-caption;
     max-width: 1200px;
-    max-height: 800px;
+    max-height: 1000px;
     background: rgb(145, 241, 241);
     padding: 20px;
     box-shadow: 0 1px 1px rgba(0,0,0,.05);

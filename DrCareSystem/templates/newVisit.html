@@ -115,7 +115,7 @@
                             <tr>
                                 <td >HCT</td>
                                 <td>
-                                    <input type="number" min="1" max="2" placeholder=" {{results.HTC}}">
+                                    <input type="number" min="1" max="2" placeholder=" {{results.HCT}}">
                             </tr>
                             <tr>
                                 <td >UREA</td>
@@ -183,79 +183,44 @@
                         <tbody>
                             <tr>
                                 <td >Is patient smoking?</td>
-                            {%if quest.isSmoking%}
-                               <td> <input type="radio"  name="isSmoking" value="True" checked> </td>
-                               <td> <input type="radio"  name="isSmoking" value="False"></td>
-                            {%else %}
-                                <td> <input type="radio"  name="smoking" value="True"> </td>
-                                <td> <input type="radio" name="smoking" value="False" checked></td>
-                            {%endif%}
+                               <td> <input type="radio"  name="isSmoking"  value="True" {%if quest.isSmoking%} checked {%endif%}> </td>
+                               <td> <input type="radio"  name="isSmoking" value="" {%if not quest.isSmoking%} checked {%endif%}></td>
                             </tr>
 
                             <tr>
                                 <td >Is patient oriental?</td>
-                            {%if quest.isOriental%}
-                                 <td> <input type="radio" name="isOriental" value="True" checked> </td>
-                               <td> <input type="radio"  name="isOriental" value="False"></td>
-                            {%else %}
-                                <td> <input type="radio" name="isOriental" value="True" > </td>
-                               <td> <input type="radio"  name="isOriental" value="False" checked></td>
-                            {%endif%}
+                            <td> <input type="radio"  name="isOriental"  value="True"  {%if quest.isOriental%} checked {%endif%}> </td>
+                            <td> <input type="radio"  name="isOriental" value="" {%if not quest.isOriental%} checked {%endif%}></td>
                             </tr>
 
                             <tr>
                                 <td >Is patient drug sensitive?</td>
-                            {%if quest.isDrugsSensitive%}
-                                 <td> <input type="radio" name="isDrugsSensitive" value="True" checked> </td>
-                               <td> <input type="radio"  name="isDrugsSensitive" value="False"></td>
-                            {%else %}
-                                <td> <input type="radio" name="isDrugsSensitive" value="True" > </td>
-                               <td> <input type="radio"  name="isDrugsSensitive" value="False" checked></td>
-                            {%endif%}
+                             <td> <input type="radio"  name="isDrugsSensitive"  value="True"  {%if quest.isDrugsSensitive%} checked {%endif%}> </td>
+                            <td> <input type="radio"  name="isDrugsSensitive" value="" {%if not quest.isDrugsSensitive%} checked {%endif%}></td>
                             </tr>
 
                             <tr>
                                 <td >Does patient have chronical disease?</td>
-                            {%if quest.hasChronicalDisease%}
-                                 <td> <input type="radio" name="hasChronicalDisease" value="True" checked> </td>
-                               <td> <input type="radio"  name="hasChronicalDisease" value="False"></td>
-                            {%else %}
-                                  <td> <input type="radio" name="hasChronicalDisease" value="True"> </td>
-                               <td> <input type="radio"  name="hasChronicalDisease" value="False" checked></td>
-                            {%endif%}
+                               <td> <input type="radio"  name="hasChronicalDisease"  value="True"  {%if quest.hasChronicalDisease%} checked {%endif%}> </td>
+                            <td> <input type="radio"  name="hasChronicalDisease" value="" {%if not quest.hasChronicalDisease%} checked {%endif%}></td>
                             </tr>
 
                             <tr>
                                 <td >Does patient need diet?</td>
-                            {%if quest.isNeedsDiet%}
-                                <td> <input type="radio" name="isNeedsDiet" value="True" checked> </td>
-                               <td> <input type="radio"  name="isNeedsDiet" value="False"></td>
-                            {%else %}
-                                 <td> <input type="radio" name="isNeedsDiet" value="True"> </td>
-                               <td> <input type="radio"  name="isNeedsDiet" value="False" checked></td>
-                            {%endif%}
+                                <td> <input type="radio"  name="isNeedsDiet"  value="True"  {%if quest.isNeedsDiet%} checked {%endif%}> </td>
+                            <td> <input type="radio"  name="isNeedsDiet" value="" {%if not quest.isNeedsDiet%} checked {%endif%}></td>
                             </tr>
 
                             <tr>
                                 <td >Is patient eating too much meat?</td>
-                            {%if quest.isEatingToMuchMeat%}
-                                <td> <input type="radio" name="isEatingToMuchMeat" value="True" checked> </td>
-                               <td> <input type="radio"  name="isEatingToMuchMeat" value="False"></td>
-                            {%else %}
-                                  <td> <input type="radio" name="isEatingToMuchMeat" value="True"> </td>
-                               <td> <input type="radio"  name="isEatingToMuchMeat" value="False" checked></td>
-                            {%endif%}
+                              <td> <input type="radio"  name="isEatingToMuchMeat"  value="True"  {%if quest.isEatingToMuchMeat%} checked {%endif%}> </td>
+                            <td> <input type="radio"  name="isEatingToMuchMeat" value="" {%if not quest.isEatingToMuchMeat%} checked {%endif%}></td>
                             </tr>
 
                             <tr>
                                 <td >Is patient malnourished?</td>
-                            {%if quest.isMalnourished%}
-                               <td> <input type="radio" name="isMalnourished" value="True" checked> </td>
-                               <td> <input type="radio"  name="isMalnourished" value="False"></td>
-                            {%else %}
-                              <td> <input type="radio" name="isMalnourished" value="True"> </td>
-                               <td> <input type="radio"  name="isMalnourished" value="False" checked></td>
-                            {%endif%}
+                                 <td> <input type="radio"  name="isMalnourished"  value="True"  {%if quest.isMalnourished%} checked {%endif%}> </td>
+                            <td> <input type="radio"  name="isMalnourished" value="" {%if not quest.isMalnourished%} checked {%endif%}></td>
                             </tr>
                     {% if quest%}
                     {% else %}
