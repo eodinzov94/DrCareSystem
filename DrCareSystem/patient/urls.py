@@ -6,5 +6,6 @@ urlpatterns = [
     path("getVisits", views.getVisits, name='getVisits'),
     path("getInfo", views.getInfo, name='getInfo'),
     path("newPatient",views.newPatient,name='newPatient'),
-    path("newVisit",views.newVisit,name='newVisit')
+    path("newVisit",views.newVisit,name='newVisit'),
+    path("updateQuest",views.updateQuest,name='updateQuest'),
 ]

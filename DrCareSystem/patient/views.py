@@ -23,7 +23,9 @@ def newVisit (request): #TODO: Add functionality
     if request.method == 'POST':
         id      = request.POST['id']
         patient = Patient.objects.get(id=id)
-        return render(request, 'newVisit.html', {'patient':patient})
+        results = patient.health_param
+        quest   = patient.questionnaire
+        return render(request, 'newVisit.html', {'patient':patient,'results': results,'quest': quest})
         
 
 @login_required
@@ -36,7 +38,6 @@ def getInfo(request):
         return render(request, 'medinfo.html', {'results': results,'quest': quest})
     else:
         return redirect('patients')
-
 
 @login_required
 def newPatient(request): #TODO: make error appear on screen.
@@ -72,3 +73,37 @@ def newPatient(request): #TODO: make error appear on screen.
         return redirect('patients')
     else:
         return render(request, 'newPatient.html')
+
+
+def updateQuest(request):
+    if request.method == 'POST':
+        id                  = request.POST.get('patient_db_id')
+        isSmoking           = bool(request.POST.get('isSmoking'))
+        isOriental          = bool(request.POST.get('isOriental'))
+        isDrugsSensitive    = bool(request.POST.get('isDrugsSensitive'))
+        hasChronicalDisease = bool(request.POST.get('hasChronicalDisease'))
+        isNeedsDiet         = bool(request.POST.get('isNeedsDiet'))
+        isEatingToMuchMeat  = bool(request.POST.get('isEatingToMuchMeat'))
+        isMalnourished      = bool(request.POST.get('isMalnourished'))
+        patient = Patient.objects.get(id=id)
+        quest   = patient.questionnaire
+        if quest is None:
+            quest = Questionnaire(
+                isSmoking              =  isSmoking ,
+                isOriental             =  isOriental, 
+                isDrugsSensitive       =  isDrugsSensitive ,
+                hasChronicalDisease    =  hasChronicalDisease ,
+                isNeedsDiet            =  isNeedsDiet ,
+                isEatingToMuchMeat     =  isEatingToMuchMeat ,
+                isMalnourished         =  isMalnourished 
+            )
+        else:
+            quest.isSmoking              =  isSmoking ,
+            quest.isOriental             =  isOriental, 
+            quest.isDrugsSensitive       =  isDrugsSensitive ,
+            quest.hasChronicalDisease    =  hasChronicalDisease ,
+            quest.isNeedsDiet            =  isNeedsDiet ,
+            quest.isEatingToMuchMeat     =  isEatingToMuchMeat ,
+            quest.isMalnourished         =  isMalnourished 
+        quest.save()
+    return redirect('newVisit')
