@@ -119,7 +119,7 @@ def updateQuest(request):
 
 def genRecQuest(quest):
     counter = 1
-    rec = "======Questionnaire reccomendations========\n"
+    rec = "\n======Questionnaire reccomendations========\n"
     if quest.isSmoking:
         rec += str(counter)+".Patient smokes - Recommendation: Stop smoking\n"
         counter+=1
@@ -136,7 +136,7 @@ def genRecQuest(quest):
 
 def genRecHealth(quest, params, patient):
     counter = 1
-    rec = "======Health parameters reccomendations========\n"
+    rec = "\n======Health parameters reccomendations========\n"
     # WBC
     wbc_smaller ="WBC Levels point at a viral disease or possibly immunity system failure.\n Recommendation: Rest at home, Arrange follow up with Doctor if disease doesn't pass in 3 days.\n"
     wbc_bigger = "WBC Levels point at a probable infection, or rarely a blood disease.\n Recommendation: Check temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n If patient tests positive for blood disease, administer cyclophosphamide and corticosteroids\n"
