@@ -40,7 +40,7 @@ def getInfo(request):
         return redirect('patients')
 
 @login_required
-def newPatient(request): #TODO: make error appear on screen.
+def newPatient(request):
     if request.method == 'POST':
         fullName = request.POST.get('fullname')
         personID = request.POST.get('personid')
