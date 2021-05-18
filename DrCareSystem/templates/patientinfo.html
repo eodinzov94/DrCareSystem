@@ -45,7 +45,12 @@
                     <tr>
                         <td >{{visit.date}}</td>
                         <td>
-                            <a href="#" class="view" title="View history" data-toggle="tooltip"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                             <form action="{% url 'showVisit' %}" method="post">
+                                            {% csrf_token %}     
+                                 <button  name="patient_visit_id" type="submit" class="btn btn-primary" value="{{visit.id}}@{{patient.id}}">
+                                 <i class="fa fa-eye" aria-hidden="true"></i>
+                                 </button>
+                            </form> 
                         </td>
                     </tr>
                 {%endfor%}

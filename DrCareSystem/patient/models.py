@@ -11,7 +11,7 @@ class HealthParameters(models.Model):
     title        = models.CharField(max_length=100, default ='Health Parameters')
     WBC          = models.IntegerField(default=0)
     NEUT         = models.FloatField(default=0)
-    LYMPH        = models.FloatField(default=0)
+    LYMPH        = models.IntegerField(default=0)
     RBC          = models.FloatField(default=0)
     HCT          = models.FloatField(default=0)
     UREA         = models.IntegerField(default=0)

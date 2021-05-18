@@ -22,6 +22,13 @@
 
 <div class="container-xl">
         <div class="table-wrapper">
+            {% if messages %}
+				<div class="alert alert-info" role="alert">
+           			 {% for message in messages %}
+          	 				{{message}} 
+            		 {% endfor %}
+        		</div>
+			{% endif %}
             <h2> Visit Details </h2>
 
              <table class="table table-striped table-hover table-bordered">
@@ -44,16 +51,20 @@
                     </tr>
                 </tbody>
             </table>   
+            
+                <form action="{% url 'getRec' %}" method="post">
+                            {% csrf_token %}
+            <textarea name="desc" rows="15" cols="150"></textarea>
+                    <button  name="patient_id" type="submit" class="btn btn-secondary" value="{{patient.id}}"  style="float: right;" title="Add patient"> <i class="fa fa-arrow-circle-right">  Get reccomendations </i> </button>
+                </form> 
 
-            <textarea name="text" rows="15" cols="150"></textarea>
              <button id="qBtn" class="btn btn-info"><i class="fa fa-question-circle" aria-hidden="true"></i> Questions</button>
              &nbsp;&nbsp;
             <button id="myBtn" class="btn btn-info"><i class="fa fa-medkit" aria-hidden="true"></i> Health parameters</button>
-             {% csrf_token %}
-             <button type="form" class="btn btn-secondary" title="Add patient" id="func_to_add_patient" value="" style="float: right;">
-            <i class="fa fa-arrow-circle-right">  Get reccomendations </i> 
-        </button>
        
+
+
+
         </div>
        
 </div>
@@ -68,6 +79,8 @@
     <div class="modal-wrapper">
          <span class="close"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></span>
         <div class="container-xl">
+            <form action="updateParams" method="post">
+                 {% csrf_token %}
             <div class="table-responsive">
                 <div class="table-wrapper">
                    
@@ -93,65 +106,67 @@
                             <tr>
                                 <td >WBC</td>
                                 <td>
-                                    <input type="number" min="1" max="2" placeholder=" {{results.WBC}}">
+                                    <input type="number" name="WBC" min="0" value="{{results.WBC}}" placeholder=" {{results.WBC}}">
                                 </td>
                             </tr>
                             <tr>
                                 <td >NEUT</td>
                                 <td>
-                                 <input type="number" min="1" max="2" placeholder=" {{results.NEUT}}">
+                                 <input type="number" name="NEUT" min="0" max="100" value="{{results.NEUT}}" placeholder=" {{results.NEUT}}%">
                                 </td>
                             </tr>
                             <tr>
                                 <td >LYMPH</td>
                                 <td>
-                                   <input type="number" min="1" max="2" placeholder=" {{results.LYMPH}}">
+                                   <input type="number" name="LYMPH" min="0" max="100" value="{{results.LYMPH}}" placeholder=" {{results.LYMPH}}%">
                             </tr>
                             <tr>
                                 <td >RBC</td>
                                 <td>
-                                   <input type="number" min="1" max="2" placeholder=" {{results.RBC}}">
+                                   <input type="number" name="RBC" min="0"  step="0.1" value="{{results.RBC}}" placeholder=" {{results.RBC}}">
                             </tr>
                             <tr>
                                 <td >HCT</td>
                                 <td>
-                                    <input type="number" min="1" max="2" placeholder=" {{results.HCT}}">
+                                    <input type="number"  name="HCT" min="0" max="100" value="{{results.HCT}}" placeholder=" {{results.HCT}}%">
                             </tr>
                             <tr>
                                 <td >UREA</td>
                                 <td>
-                                    <input type="number" min="1" max="2" placeholder=" {{results.UREA}}">
+                                    <input type="number" name="UREA" min="0" max="100" value="{{results.UREA}}" placeholder=" {{results.UREA}}%">
                             </tr>
                             <tr>
                                 <td >HB</td>
                                 <td>
-                                    <input type="number" min="1" max="2" placeholder=" {{results.HB}}">
+                                    <input type="number" name="HB" min="0" step="0.1" value="{{results.HB}}" placeholder=" {{results.HB}}">
                             </tr>
                             <tr>
                                 <td >CREATININE</td>
                                 <td>
-                                     <input type="number" min="1" max="2" step="0.1" placeholder=" {{results.CREATININE}}">
+                                     <input type="number" name="CREATININE" min="0" step="0.1" value="{{results.CREATININE}}" placeholder=" {{results.CREATININE}}">
                             </tr>
                             <tr>
                                 <td >IRON</td>
                                 <td>
-                                    <input type="number" min="1" max="2" step="0.1" placeholder=" {{results.IRON}}">
+                                    <input type="number" name="IRON" min="0" value="{{results.IRON}}" placeholder=" {{results.IRON}}">
                             </tr>
                             <tr>
                                 <td >HDL</td>
                                 <td>
-                                   <input type="number" min="1" max="2" step="0.1" placeholder=" {{results.HDL}}">
+                                   <input type="number" name="HDL" min="0" value="{{results.HDL}}" placeholder=" {{results.HDL}}">
                             </tr>
                             <tr>
                                 <td >ALKALINE</td>
                                 <td>
-                                    <input type="number" min="1" max="2" step="0.1" placeholder=" {{results.ALKALINE}}">
+                                    <input type="number" name="ALKALINE" min="0"  value="{{results.ALKALINE}}" placeholder=" {{results.ALKALINE}}">
                             </tr>
                      
                         </tbody>
                     </table>
                 </div>
             </div>
+             <button type="submit" name="patient_db_id" class="btn btn-secondary" title="Update" value="{{patient.id}}" style="float: right;"> <i class="fa fa-arrow-circle-right">  Update </i> 
+            </form >
         </div> 
     </div> 
 </div> 
