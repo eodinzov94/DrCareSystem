@@ -137,67 +137,101 @@ def genRecQuest(quest):
 def genRecHealth(quest, params, patient):
     counter = 1
     rec = "\n======Health parameters reccomendations========\n"
+    Diseases = {"Infection":0,"Blood disease":0 ,"Cancer":0 ,"Viral disease":0 ,"Autoimmune failure":0 ,"Blood creation failure":0 ,"Lung disease":0 ,"Anemia":0 ,"Excessive bleeding":0 ,"Kidney disease":0 ,"Dehydration":0 ,"Faulty diet":0 ,"Liver disease":0 ,"Iron deficiency":0 ,"Muscle disease":0 ,"Iron poisoning":0 ,"Heart disease":0 ,"Diabetes":0 ,"Thyroid gland":0 ,"Bile routes":0}
+
     # WBC
-    wbc_smaller ="WBC Levels point at a viral disease or possibly immunity system failure.\n Recommendation: Rest at home, Arrange follow up with Doctor if disease doesn't pass in 3 days.\n"
-    wbc_bigger = "WBC Levels point at a probable infection, or rarely a blood disease.\n Recommendation: Check temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n If patient tests positive for blood disease, administer cyclophosphamide and corticosteroids\n"
+    wbc_smaller ="WBC Levels point at a viral disease or possibly immunity system failure.\n Recommendation: Rest at home, Arrange follow up with Doctor if disease doesn't pass in 3 days.\n if patient shows signs of cancer- administer Etrectinib\n"
+    wbc_bigger = "WBC Levels point at a probable infection, or rarely a blood disease or even cancer.\n Recommendation: Check temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n If patient shows signs of cancer- administer Entrectinib\n If patient tests positive for blood disease, administer cyclophosphamide and corticosteroids\n"
     if 0<patient.age<=3:
         if params.WBC < 6000:
             rec +=str(counter)+"." + wbc_smaller
+            Diseases["Viral disease"]+=1
+            Diseases["Autoimmune failure"]+=1
+            Diseases["Cancer"]+=1
             counter+=1
         elif params.wbc > 17500:
             rec +=str(counter)+"." + wbc_bigger
+            Diseases["Infection"]+=1
+            Diseases["Blood disease"]+=1
+            Diseases["Cancer"]+=1
             counter+=1
     elif 3<patient.age<=17:
         if params.WBC < 5500:
             rec +=str(counter)+"." + wbc_smaller
+            Diseases["Viral disease"]+=1
+            Diseases["Autoimmune failure"]+=1
+            Diseases["Cancer"]+=1
             counter+=1
         elif params.wbc > 15500:
             rec +=str(counter)+"." + wbc_bigger
+            Diseases["Infection"]+=1
+            Diseases["Blood disease"]+=1
+            Diseases["Cancer"]+=1
             counter+=1
     else:
         if params.WBC < 4500:
             rec +=str(counter)+"." + wbc_smaller
+            Diseases["Viral disease"]+=1
+            Diseases["Autoimmune failure"]+=1
+            Diseases["Cancer"]+=1
             counter+=1
 
         elif params.wbc > 11000:
             rec +=str(counter)+"." + wbc_bigger
+            Diseases["Infection"]+=1
+            Diseases["Blood disease"]+=1
+            Diseases["Cancer"]+=1
             counter+=1
 
     #Neut
-    neut_smaller ="Neut levels hint at blood creation difficulties- possible infection.\n Recommendation: B12 treatment, 10mg/day for 30 days. Folic acid treatment, 5mg/day for 30 days.\nCheck temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n"
+    neut_smaller ="Neut levels hint at blood creation difficulties- possible infection.\n Recommendation: B12 treatment, 10mg/day for 30 days. Folic acid treatment, 5mg/day for 30 days.\n if patient shows signs of cancer- administer Etrectinib\nCheck temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n"
     neut_bigger = "Neut levels hint at probable infection.\nRecommendation: Check temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n"
     if params.NEUT < 28:
         rec +=str(counter)+"." + neut_smaller
+        Diseases["Blood creation failure"]+=1
+        Diseases["Infection"]+=1
+        Diseases["Cancer"]+=1
         counter+=1
     elif params.NEUT > 54:
         rec +=str(counter)+"." + neut_bigger
+        Diseases["Infection"]+=1
         counter+=1
 
     #Lymph
     lymp_smaller ="Lymph levels hint at blood creation difficulties.\n Recommendation: B12 treatment, 10mg/day for 30 days. Folic acid treatment, 5mg/day for 30 days.\n"
-    lymp_bigger = "Lymph levels hint at probable infection.\nRecommendation: Check temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n"
+    lymp_bigger = "Lymph levels hint at probable infection.\nRecommendation: Check temperature, exceeding levels might point towards infection. in case of infection administer antibiotics\n if patient shows signs of cancer- administer Etrectinib\n"
     if params.LYMPH < 36:
         rec +=str(counter)+"." + lymp_smaller
+        Diseases["Blood creation failure"]+=1
+        counter+=1
     elif params.LYMPH > 52:
         rec +=str(counter)+"." + lymp_bigger
+        Diseases["Infection"]+=1
+        Diseases["Cancer"]+=1
         counter+=1
 
     #RBC
-    rbc_bigger ="RBC levels hint at blood creation difficulties.\n Recommendation: B12 treatment, 10mg/day for 30 days. Folic acid treatment, 5mg/day for 30 days.\n Check if the patient shows signs of lung disease, and schedule an XRay accordingly."
-    rbc_smaller = "RBC levels hint at anemia or excessive bleeding.\nRecommendation: If patient shows signs of excessive bleeding- immediately transfer to a hospital.\n If patient shows signs of anemia, treat with 10mg B12 pills twice a day for 30 days."
+    rbc_bigger ="RBC levels hint at blood creation difficulties.\n Recommendation: B12 treatment, 10mg/day for 30 days. Folic acid treatment, 5mg/day for 30 days.\n Check if the patient shows signs of lung disease, and schedule an XRay accordingly.\n"
+    rbc_smaller = "RBC levels hint at anemia or excessive bleeding.\nRecommendation: If patient shows signs of excessive bleeding- immediately transfer to a hospital.\n If patient shows signs of anemia, treat with 10mg B12 pills twice a day for 30 days.\n"
     if params.RBC < 4.5:
         rec +=str(counter)+"." + rbc_smaller
+        Diseases["Anemia"]+=1
+        Diseases["Excessive bleeding"]+=1
         counter+=1
     elif params.RBC > 6:
         rec +=str(counter)+"." + rbc_bigger
+        Diseases["Blood creation failure"]+=1
+        Diseases["Lung disease"]+=1
         counter+=1
 
     #HCT
-    hct_smaller ="HCT levels hint at anemia or excessive bleeding.\nRecommendation: If patient shows signs of excessive bleeding- immediately transfer to a hospital.\n If patient shows signs of anemia, treat with 10mg B12 pills twice a day for 30 days."
+    hct_smaller ="HCT levels hint at anemia or excessive bleeding.\nRecommendation: If patient shows signs of excessive bleeding- immediately transfer to a hospital.\n If patient shows signs of anemia, treat with 10mg B12 pills twice a day for 30 days.\n"
     hct_bigger = "HCT Levels point towards the probability that patient is a smoker. Recommendation: Stop smoking.\n"
     if patient.gender == 'Male':
         if params.HCT < 37:
             rec +=str(counter)+"." + hct_smaller
+            Diseases["Anemia"]+=1
+            Diseases["Excessive bleeding"]+=1
             counter+=1
 
         elif params.HCT > 54:
@@ -206,6 +240,8 @@ def genRecHealth(quest, params, patient):
     else:
         if params.HCT < 33:
             rec +=str(counter)+"." + hct_smaller
+            Diseases["Anemia"]+=1
+            Diseases["Excessive bleeding"]+=1
             counter+=1
 
         elif params.HCT > 47:
@@ -218,18 +254,28 @@ def genRecHealth(quest, params, patient):
     if quest.isOriental:
         if params.UREA < 17:
             rec +=str(counter)+"." + urea_smaller
+            Diseases["Faulty diet"]+=1
+            Diseases["Liver disease"]+=1
             counter+=1
 
         elif params.HCT > 47.3:
             rec +=str(counter)+"." + urea_bigger
+            Diseases["Kidney disease"]+=1
+            Diseases["Dehydration"]+=1
+            Diseases["Faulty diet"]+=1
             counter+=1
     else:
         if params.HCT < 17:
             rec +=str(counter)+"." + urea_smaller
+            Diseases["Faulty diet"]+=1
+            Diseases["Liver disease"]+=1
             counter+=1
 
         elif params.HCT > 43:
             rec +=str(counter)+"." + urea_bigger
+            Diseases["Kidney disease"]+=1
+            Diseases["Dehydration"]+=1
+            Diseases["Faulty diet"]+=1
             counter+=1
     
     #Hb
@@ -238,11 +284,17 @@ def genRecHealth(quest, params, patient):
     if patient.age<=17:
         if params.HB < 11.5:
             rec +=str(counter)+"." + hb_smaller
+            Diseases["Anemia"]+=1
+            Diseases["Excessive bleeding"]+=1
+            Diseases["Iron deficiency"]+=1
             counter+=1
 
     else:
         if params.HB<12:
             rec +=str(counter)+"." + hb_smaller
+            Diseases["Anemia"]+=1
+            Diseases["Excessive bleeding"]+=1
+            Diseases["Iron deficiency"]+=1
             counter+=1
 
     #CREATININE
@@ -252,30 +304,50 @@ def genRecHealth(quest, params, patient):
     if patient.age <3:
         if params.CREATININE < 0.2:
             rec +=str(counter)+"." + Creatinine_smaller
+            Diseases["Muscle disease"]+=1
+            Diseases["Faulty diet"]+=1
             counter+=1
         elif params.CREATININE > 0.5:
             rec +=str(counter)+"." + Creatinine_bigger
+            Diseases["Kidney disease"]+=1
+            Diseases["Faulty diet"]+=1
+            Diseases["Muscle disease"]+=1
             counter+=1
     elif patient.age< 18:
         if params.CREATININE < 0.5:
             rec +=str(counter)+"." + Creatinine_smaller
+            Diseases["Muscle disease"]+=1
+            Diseases["Faulty diet"]+=1
             counter+=1
         if params.CREATININE > 1:
             rec +=str(counter)+"." + Creatinine_bigger
+            Diseases["Kidney disease"]+=1
+            Diseases["Faulty diet"]+=1
+            Diseases["Muscle disease"]+=1
             counter+=1
     elif patient.age < 60:
         if params.CREATININE < 0.6:
             rec +=str(counter)+"." + Creatinine_smaller
+            Diseases["Muscle disease"]+=1
+            Diseases["Faulty diet"]+=1
             counter+=1
         if params.CREATININE > 1:
             rec +=str(counter)+"." + Creatinine_bigger
+            Diseases["Kidney disease"]+=1
+            Diseases["Faulty diet"]+=1
+            Diseases["Muscle disease"]+=1
             counter+=1
     else:
         if params.CREATININE < 0.6:
             rec +=str(counter)+"." + Creatinine_smaller
+            Diseases["Muscle disease"]+=1
+            Diseases["Faulty diet"]+=1
             counter+=1
         if params.CREATININE > 1.2:
             rec +=str(counter)+"." + Creatinine_bigger
+            Diseases["Kidney disease"]+=1
+            Diseases["Faulty diet"]+=1
+            Diseases["Muscle disease"]+=1
             counter+=1
 
     #Iron
@@ -285,16 +357,22 @@ def genRecHealth(quest, params, patient):
     if patient.gender == 'Male':
         if params.IRON < 60:
             rec +=str(counter)+"." + iron_smaller
+            Diseases["Faulty diet"]+=1
+            Diseases["Excessive bleeding"]+=1
             counter+=1
         elif params.IRON > 160:
             rec +=str(counter)+"." + iron_bigger
+            Diseases["Iron poisoning"]+=1
             counter+=1
     else:
         if params.IRON < 48:
             rec +=str(counter)+"." + iron_smaller
+            Diseases["Faulty diet"]+=1
+            Diseases["Excessive bleeding"]+=1
             counter+=1
         elif params.IRON > 128:
             rec +=str(counter)+"." + iron_bigger
+            Diseases["Iron poisoning"]+=1
             counter+=1
 
     #HDL
@@ -304,6 +382,8 @@ def genRecHealth(quest, params, patient):
     if patient.gender == 'Male':
         if params.HDL < 29:
             rec +=str(counter)+"." + hdl_smaller
+            Diseases["Heart disease"]+=1
+            Diseases["Diabetes"]+=1
             counter+=1
         elif params.HDL > 62:
             rec +=str(counter)+"." + hdl_bigger
@@ -311,32 +391,49 @@ def genRecHealth(quest, params, patient):
     else:
         if params.HDL < 34:
             rec +=str(counter)+"." + hdl_smaller
+            Diseases["Heart disease"]+=1
+            Diseases["Diabetes"]+=1
             counter+=1
         elif params.HDL > 82:
             rec +=str(counter)+"." + hdl_bigger
             counter+=1
 
     #ALKALINE
-    alk_smaller="Alkaline levels show lacking diet, probable B12 deficiency and/or protein, C, folic acid or B6 deficiencies.\nRecommendation: Refer patient to blood test to discern the possibile deficiencies."
+    alk_smaller="Alkaline levels show lacking diet, probable B12 deficiency and/or protein, C, folic acid or B6 deficiencies.\nRecommendation: Refer patient to blood test to discern the possibile deficiencies.\n"
     alk_bigger="Alkaline levels hint at one of the following: Liver diseases, Bile routes diseases, pregnancy, overactive thyroid gland or a mixture of different drugs.\nRecommendation: For bile route diseases, refer to surgery.\n For liver diseases, refer to specialist for analysis.\nFor an overactive thyroid gland, administer Propylthiouracil.\n"
 
     if quest.isOriental:
         if params.ALKALINE < 60:
             rec +=str(counter)+"." + alk_smaller
+            Diseases["Faulty diet"]+=1
             counter+=1
 
         elif params.ALKALINE > 120:
             rec +=str(counter)+"." + alk_bigger
+            Diseases["Liver disease"]+=1
+            Diseases["Thyroid gland"]+=1
+            Diseases["Bile routes"]+=1
             counter+=1
     else:
         if params.ALKALINE < 30:
             rec +=str(counter)+"." + alk_smaller
+            Diseases["Faulty diet"]+=1
             counter+=1
 
         elif params.ALKALINE > 90:
             rec +=str(counter)+"." + alk_bigger
+            Diseases["Liver disease"]+=1
+            Diseases["Thyroid gland"]+=1
+            Diseases["Bile routes"]+=1
             counter+=1
-
+    lst = [(v,k) for k,v in Diseases.items() if v > 1]
+    lst.sort()
+    lst = lst[::-1]
+    top = "Most probable diseases: \n"
+    for d in lst :
+        top += d[1] + ", " + str(d[0]) + " different sources point towards it.\n"
+        
+    rec = top + rec
     return rec
 @login_required
 def showVisit(request,visit_id=None,patient=None):
