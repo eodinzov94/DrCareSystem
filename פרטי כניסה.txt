@@ -1,0 +1,16 @@
+על מנת להכנס למערכת השתמשו בפרטים הבאים:
+
+Username: DrMoshe
+ID: 001
+password: moshe@12
+
+
+על מנת להכנס לפאנל אדמיניסטרטור הכנסו ל:
+
+http://127.0.0.1:8000/admin/
+
+והכניסו את הפרטים הבאים:
+
+username: admin
+password: admin
+
