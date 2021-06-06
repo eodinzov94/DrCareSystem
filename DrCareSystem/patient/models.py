@@ -15,7 +15,7 @@ class HealthParameters(models.Model):
     RBC          = models.FloatField(default=0)
     HCT          = models.FloatField(default=0)
     UREA         = models.IntegerField(default=0)
-    HB           = models.IntegerField(default=0)
+    HB           = models.FloatField(default=0)
     CREATININE   = models.FloatField(default=0)
     IRON         = models.IntegerField(default=0)
     HDL          = models.IntegerField(default=0)

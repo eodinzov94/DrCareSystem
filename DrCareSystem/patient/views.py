@@ -149,7 +149,7 @@ def genRecHealth(quest, params, patient):
             Diseases["Autoimmune failure"]+=1
             Diseases["Cancer"]+=1
             counter+=1
-        elif params.wbc > 17500:
+        elif params.WBC > 17500:
             rec +=str(counter)+"." + wbc_bigger
             Diseases["Infection"]+=1
             Diseases["Blood disease"]+=1
@@ -162,7 +162,7 @@ def genRecHealth(quest, params, patient):
             Diseases["Autoimmune failure"]+=1
             Diseases["Cancer"]+=1
             counter+=1
-        elif params.wbc > 15500:
+        elif params.WBC > 15500:
             rec +=str(counter)+"." + wbc_bigger
             Diseases["Infection"]+=1
             Diseases["Blood disease"]+=1
@@ -176,7 +176,7 @@ def genRecHealth(quest, params, patient):
             Diseases["Cancer"]+=1
             counter+=1
 
-        elif params.wbc > 11000:
+        elif params.WBC > 11000:
             rec +=str(counter)+"." + wbc_bigger
             Diseases["Infection"]+=1
             Diseases["Blood disease"]+=1
@@ -492,7 +492,7 @@ def updateParams(request):
                 RBC          = float(RBC),
                 HCT          = float(HCT),
                 UREA         = int(UREA),
-                HB           = int(HB),
+                HB           = float(HB),
                 CREATININE   = float(CREATININE),
                 IRON         = int(IRON),
                 HDL          = int(HDL),
@@ -509,7 +509,7 @@ def updateParams(request):
             health_param.RBC        = float(RBC)
             health_param.HCT        = float(HCT)
             health_param.UREA       = int(UREA)
-            health_param.HB         = int(HB)
+            health_param.HB         = float(HB)
             health_param.CREATININE = float(CREATININE)
             health_param.IRON       = int(IRON)
             health_param.HDL        = int(HDL)
